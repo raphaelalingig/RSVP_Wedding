@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Background from "../Background";
 import giftIcon from "../../assets/icons/envelope-icon.gif";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import Envelope from "./Actions/Envelope";
 
 export default function FirstSection() {
   AOS.init();
+
+  const [showEnvelope, setShowEnvelope] = useState(false);
+  const handleEnvelopeClick = () => {
+    setShowEnvelope(true);
+  };
 
   return (
     <div>
@@ -53,8 +58,19 @@ export default function FirstSection() {
           </div>
         </div>
         <div data-aos="fade-left" className="absolute top-0 right-0 p-4">
-          <img src={giftIcon} alt="Gift Icon" className="w-16 md:w-24" />
+          <img
+            onClick={handleEnvelopeClick}
+            src={giftIcon}
+            alt="Gift Icon"
+            className="w-16 md:w-24"
+          />
         </div>
+        {showEnvelope && (
+          <Envelope
+            setShowEnvelope={setShowEnvelope}
+            showEnvelope={showEnvelope}
+          />
+        )}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "flowbite": "^2.5.2",

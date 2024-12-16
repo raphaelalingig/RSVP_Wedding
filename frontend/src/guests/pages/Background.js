@@ -8,26 +8,26 @@ import background from "../assets/background.svg";
 export default function Background({ children }) {
   return (
     <div
-      className="h-screen bg-cover bg-center bg-no-repeat"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-fixed overflow-hidden"
       style={{ backgroundImage: `url(${background})` }}
     >
       {/* Top Left Decoration */}
-      <div className="absolute top-0 left-0 w-40 sm:w-52 lg:w-64">
+      <div className="absolute top-0 left-0 w-24 sm:w-40 lg:w-64">
         <img src={topLeftFloral} alt="Top Left Floral" />
       </div>
 
       {/* Top Right Decoration */}
-      <div className="absolute top-0 right-0 w-40 sm:w-52 lg:w-64">
+      <div className="absolute top-0 right-0 w-24 sm:w-40 lg:w-64">
         <img src={topRightFloral} alt="Top Right Floral" />
       </div>
 
       {/* Bottom Left Decoration */}
-      <div className="absolute bottom-0 left-0 w-40 sm:w-52 lg:w-64">
+      <div className="absolute bottom-0 left-0 w-24 sm:w-40 lg:w-64">
         <img src={bottomLeftFloral} alt="Bottom Left Floral" />
       </div>
 
       {/* Bottom Right Decoration */}
-      <div className="absolute bottom-0 right-0 w-40 sm:w-52 lg:w-64">
+      <div className="absolute bottom-0 right-0 w-24 sm:w-40 lg:w-64">
         <img src={bottomRightFloral} alt="Bottom Right Floral" />
       </div>
 
@@ -35,7 +35,7 @@ export default function Background({ children }) {
       <div className="absolute top-0 left-0 w-full border-t border-white"></div>
       <div className="absolute bottom-0 left-0 w-full border-b border-white"></div>
 
-      <div className="relative z-10 flex items-center justify-center h-full">
+      <div className="relative z-10 flex items-center justify-center min-h-screen w-full">
         {children}
       </div>
     </div>

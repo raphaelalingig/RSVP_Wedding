@@ -121,14 +121,18 @@ export default function FirstSection() {
             </div>
           </div>
         </div>
-        <div data-aos="fade-left" className="absolute top-0 right-0 p-4">
-          <img
-            onClick={handleEnvelopeClick}
-            src={giftIcon}
-            alt="Gift Icon"
-            className="w-16 md:w-24"
-          />
-        </div>
+
+        {token && (
+          <div data-aos="fade-left" className="absolute top-0 right-0 p-4">
+            <img
+              onClick={handleEnvelopeClick}
+              src={giftIcon}
+              alt="Gift Icon"
+              className="w-16 md:w-24"
+            />
+          </div>
+        )}
+
         {showEnvelope && (
           <Envelope
             setShowEnvelope={setShowEnvelope}

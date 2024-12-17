@@ -25,7 +25,7 @@ export default function FifthSection() {
             </div>
 
             {/* Main content */}
-            <div className="relative z-10">
+            <div data-aos="zoom-in" className="relative z-10">
               <h1 className="text-4xl font-dancing-script text-center mb-8 text-white">
                 Wedding Program
               </h1>

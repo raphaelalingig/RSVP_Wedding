@@ -1,32 +1,65 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import api_url from "../../config/api_url";
 
 export default function Login() {
   const [visiblePass, setVisiblePass] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
   const toggleVisiblePass = () => {
     setVisiblePass(!visiblePass);
   };
 
-  const handleLogin = (e) => {
+  useEffect(() => {
+    // Redirect to dashboard if already authenticated
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("userData");
+
+    if (token && userData) {
+      navigate("/admin/dashboard");
+    }
+  }, [navigate]);
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     setShowSpinner(true);
-    navigate("/admin/dashboard");
+
+    try {
+      const response = await api_url.post("login", { email, password });
+
+      if (response.data.status === "success") {
+        // Save token and Data to localStorage
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userData", JSON.stringify(response.data.Data));
+
+        // Navigate to dashboard
+        navigate("/admin/dashboard");
+      } else {
+        // Handle unexpected response structure
+        setErrorMessage("Unexpected response from the server.");
+      }
+    } catch (error) {
+      setErrorMessage(
+        error.response?.data?.message || "Failed to login. Please try again."
+      );
+    } finally {
+      setShowSpinner(false);
+    }
   };
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-100 dark:bg-gray-800">
       <div className="max-w-md w-full space-y-8 bg-white rounded-xl shadow-lg p-8">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">
-            Welcome to PIMS
+            Welcome to RSVP
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Fill the credentials below to log into Sustainable Sprinkler
+            Fill the credentials below to log into RSVP admin
           </p>
         </div>
 
@@ -164,6 +197,7 @@ export default function Login() {
               </svg>
             </div>
           )}
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
           <button
             type="submit"
@@ -172,6 +206,12 @@ export default function Login() {
           >
             Login
           </button>
+          <Link to="/">
+            <div className="mt-2 text-center text-sm text-gray-600 hover:underline cursor-pointer">
+              {" "}
+              Redirect to Main Page
+            </div>
+          </Link>
         </form>
       </div>
     </div>

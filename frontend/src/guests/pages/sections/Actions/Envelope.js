@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import opening from "../../../assets/envelope/openning.mp4";
+import api_url from "../../../../config/api_url";
+import Swal from "sweetalert2";
 
-export default function Envelope({ setShowEnvelope }) {
+export default function Envelope({ setShowEnvelope, guestTokenFound }) {
   const [showRSVPForm, setShowRSVPForm] = useState(false);
   const [rsvpChoice, setRsvpChoice] = useState("");
   const [respondentName, setRespondentName] = useState(""); // State for the respondent's name
+
+  console.log("Guest Token Found:", guestTokenFound);
 
   // Handle click outside the envelope container
   const handleClose = (e) => {
@@ -19,12 +23,75 @@ export default function Envelope({ setShowEnvelope }) {
   };
 
   // Handle RSVP form submit
-  const handleSubmit = () => {
-    if (rsvpChoice && respondentName) {
-      alert(`RSVP Submitted: ${rsvpChoice}\nRespondent: ${respondentName}`);
-      setShowRSVPForm(false); // Close the RSVP form after submission
-    } else {
-      alert("Please fill in all fields.");
+  const handleSubmit = async () => {
+    try {
+      // Ensure we have a token and have selected an RSVP choice
+      if (!guestTokenFound.token || !rsvpChoice) {
+        alert("Please select an RSVP option");
+        return;
+      }
+
+      // Show SweetAlert confirmation
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: `You are about to submit your RSVP as "${rsvpChoice}"`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, submit!",
+        confirmButtonColor: "#000000",
+        cancelButtonText: "Cancel",
+        cancelButtonColor: "#d33",
+      });
+
+      // If the user confirms the action
+      if (result.isConfirmed) {
+        // Determine the status based on the RSVP choice
+        const status = rsvpChoice === "Accepts with Pleasure" ? 1 : 3;
+
+        // Make the API call to update the guest's RSVP status using Axios
+        const response = await api_url.post("editGuests", {
+          token: guestTokenFound.token,
+          status: status,
+        });
+
+        if (response.status === 200) {
+          // Handle successful RSVP submission
+          Swal.fire({
+            title: "RSVP submitted successfully!",
+            icon: "success",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#000000",
+          });
+          handleCloseRsvpForm(); // Close the form
+        }
+      }
+    } catch (error) {
+      // Handle error cases
+      console.error("RSVP Submission Error:", error);
+
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        Swal.fire({
+          title: "Error!",
+          text: `Error: ${error.response.data.message}`,
+          icon: "error",
+        });
+      } else if (error.request) {
+        // The request was made but no response was received
+        Swal.fire({
+          title: "Error!",
+          text: "No response received from the server",
+          icon: "error",
+        });
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        Swal.fire({
+          title: "Error!",
+          text: "An error occurred while submitting your RSVP",
+          icon: "error",
+        });
+      }
     }
   };
 
@@ -56,6 +123,10 @@ export default function Envelope({ setShowEnvelope }) {
         >
           <div className="w-96 bg-white rounded-lg p-8 space-y-4 shadow-lg">
             <h2 className="text-2xl text-center font-serif">RSVP</h2>
+            <p className="text-center text-gray-600 italic">
+              "Kindly let us know your presence to celebrate this joyous
+              occasion."
+            </p>
             <div className="space-y-4">
               {/* Name Input */}
               <div>
@@ -65,9 +136,9 @@ export default function Envelope({ setShowEnvelope }) {
                 <input
                   type="text"
                   id="respondent-name"
-                  value={respondentName}
-                  onChange={(e) => setRespondentName(e.target.value)}
+                  value={guestTokenFound.guestName}
                   className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg"
+                  disabled
                   placeholder="Enter your name"
                 />
               </div>
@@ -111,11 +182,16 @@ export default function Envelope({ setShowEnvelope }) {
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={!rsvpChoice || !respondentName} // Disable submit if fields are empty
                 className="px-4 py-2 bg-black text-white rounded-lg"
               >
                 Submit
               </button>
+            </div>
+            <div>
+              <p className="text-center text-gray-500 text-sm mt-4">
+                "Your response means the world to us. Thank you for making our
+                day special!"
+              </p>
             </div>
           </div>
         </div>

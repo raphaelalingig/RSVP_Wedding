@@ -5,7 +5,10 @@ export default function ThirdSection() {
   return (
     <Background>
       <div className="relative z-10 flex items-center justify-center min-h-screen w-full">
-        <div className="mt-12 max-w-screen-md mx-auto px-4 py-8 text-center space-y-8">
+        <div
+          data-aos="zoom-in"
+          className="mt-12 max-w-screen-md mx-auto px-4 py-8 text-center space-y-8"
+        >
           {/* Title */}
           <h1 className="font-aniyah text-4xl md:text-7xl font-extrabold italic text-white leading-tight">
             Details
@@ -56,7 +59,9 @@ export default function ThirdSection() {
 
           {/* RSVP Section */}
           <div>
-            <h2 className="text-yellow-300 text-lg font-bold tracking-wide uppercase">RSVP</h2>
+            <h2 className="text-yellow-300 text-lg font-bold tracking-wide uppercase">
+              RSVP
+            </h2>
             <p className="mt-2 text-white">
               Leah:{" "}
               <a href="tel:09672534143" className="underline">

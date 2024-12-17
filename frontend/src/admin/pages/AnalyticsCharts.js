@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   BarChart,
   Bar,
@@ -14,24 +14,69 @@ import {
 } from "recharts";
 import Countdown from "./Countdown";
 
-const AnalyticsCharts = () => {
-  // Sample data for monthly invites
-  const monthlyData = [
-    { month: "Jan", guests: 20 },
-    { month: "Feb", guests: 35 },
-    { month: "Mar", guests: 25 },
-    { month: "Apr", guests: 45 },
-    { month: "May", guests: 30 },
-    { month: "Jun", guests: 50 },
-  ];
+const AnalyticsCharts = ({ guestLists = [] }) => {
+  // Calculate RSVP statistics from guestLists
+  const rsvpStats = useMemo(() => {
+    const stats = {
+      confirmed: 0,
+      declined: 0,
+      pending: 0,
+    };
 
-  // Sample data for RSVP responses
-  const rsvpData = [
-    { name: "Accepts with pleasure", value: 75 },
-    { name: "Decline with regrets", value: 25 },
-  ];
+    guestLists.forEach((guest) => {
+      switch (guest.status) {
+        case 1: // Changed from 2 to 1 for Confirmed
+          stats.confirmed++;
+          break;
+        case 3: // 3 remains same for Declined
+          stats.declined++;
+          break;
+        case 2: // Changed from 1 to 2 for Pending
+        default:
+          stats.pending++;
+          break;
+      }
+    });
 
-  const RSVP_COLORS = ["#000000", "#666666"];
+    return [
+      { name: "Accepts with pleasure", value: stats.confirmed },
+      { name: "Decline with regrets", value: stats.declined },
+      { name: "Pending responses", value: stats.pending },
+    ];
+  }, [guestLists]);
+
+  const RSVP_COLORS = ["#4CAF50", "#F44336", "#FFA726"]; // Green for accepts, Red for declines, Orange for pending
+
+  // Custom label formatter for the pie chart
+  const renderCustomLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+    name,
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    if (percent < 0.05) return null; // Don't show label if slice is too small
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor="middle"
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -45,32 +90,38 @@ const AnalyticsCharts = () => {
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={rsvpData}
+                data={rsvpStats}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) =>
-                  `${name} (${(percent * 100).toFixed(0)}%)`
-                }
+                label={renderCustomLabel}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
               >
-                {rsvpData.map((entry, index) => (
+                {rsvpStats.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={RSVP_COLORS[index % RSVP_COLORS.length]}
                   />
                 ))}
               </Pie>
-              <Tooltip />
-              <Legend />
+              <Tooltip
+                formatter={(value, name) => [value, name]}
+                labelFormatter={() => ""}
+              />
+              <Legend
+                formatter={(value, entry) => {
+                  const { payload } = entry;
+                  return `${value} (${payload.value})`;
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div>
+        <div className="mt-4">
           <h1 className="text-lg font-semibold">
-            Total Invited Guests: {rsvpData[0].value + rsvpData[1].value}
+            Total Invited Guests: {guestLists.length}
           </h1>
         </div>
       </div>

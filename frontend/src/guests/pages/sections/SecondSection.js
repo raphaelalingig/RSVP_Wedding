@@ -8,8 +8,10 @@ export default function SecondSection() {
         {/* Main Container */}
         <div className="bg-opacity-90 text-white p-6 md:p-12 rounded-lg shadow-lg w-full max-w-5xl">
           {/* Parents Section */}
-          <div className="text-center mb-8">
-            <h1 className="font-aniyah text-4xl font-bold text-yellow-400">Parents</h1>
+          <div data-aos="zoom-in" className="text-center mb-8">
+            <h1 className="font-aniyah text-4xl font-bold text-yellow-400">
+              Parents
+            </h1>
             <p className="mt-2 flex flex-row justify-center gap-5">
               <span className="block">Renario L. Daňas & Elisa T. Daňas</span>
               <span className="block">
@@ -19,7 +21,7 @@ export default function SecondSection() {
           </div>
 
           {/* Entourage Section */}
-          <div className="text-center mb-10">
+          <div data-aos="zoom-in" className="text-center mb-10">
             <h2 className="font-aniyah text-3xl font-bold text-yellow-400 mb-4">
               Entourage List
             </h2>
@@ -92,7 +94,9 @@ export default function SecondSection() {
             {/* Candle, Veil, and Cord */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div>
-                <h3 className="text-lg font-semibold text-yellow-300">Candle</h3>
+                <h3 className="text-lg font-semibold text-yellow-300">
+                  Candle
+                </h3>
                 <p>Gary Vic Monton</p>
                 <p>Christine Paula Villano</p>
               </div>

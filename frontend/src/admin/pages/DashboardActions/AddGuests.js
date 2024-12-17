@@ -1,12 +1,66 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import api_url from "../../../config/api_url";
+import Swal from "sweetalert2";
 export default function AddGuests({
   isModalOpen,
   setIsModalOpen,
-  guestName,
-  setGuestName,
-  handleAddGuestSubmit,
+  fetchGuests,
 }) {
+  const [guestName, setGuestName] = React.useState("");
+  const [adminEmail, setAdminEmail] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
+      try {
+        const parsedData = JSON.parse(storedUserData);
+        setAdminEmail(parsedData.email || "");
+        setAdminPassword(parsedData.password || "");
+      } catch (error) {
+        console.error("Error parsing userData:", error);
+      }
+    }
+  }, []);
+  const handleAddGuestSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await api_url.post("addGuest", {
+        guestName,
+        emailAdmin: adminEmail,
+        passwordAdmin: adminPassword,
+      });
+
+      if (response.status === 200) {
+        // Display success message with black-and-white theme
+        Swal.fire({
+          icon: "success",
+          title: "Guest Added Successfully",
+          text: "The guest has been added to the system.",
+          background: "#fff",
+          color: "#000",
+          confirmButtonColor: "#000",
+          confirmButtonText: "Okay",
+        });
+        setIsModalOpen(false);
+        fetchGuests();
+      }
+    } catch (error) {
+      // Display error message with black-and-white theme
+      Swal.fire({
+        icon: "error",
+        title: "Error Adding Guest",
+        text: "Something went wrong. Please try again.",
+        background: "#fff",
+        color: "#000",
+        confirmButtonColor: "#000",
+        confirmButtonText: "Okay",
+      });
+    }
+
+    setIsModalOpen(false);
+  };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none bg-gray-900 bg-opacity-50">
       <div className="relative w-full max-w-md mx-auto">

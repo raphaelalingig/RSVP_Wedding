@@ -22,7 +22,11 @@ const urlFormat = "/api/v1/";
 app.use(json());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://rsvp.up.railway.app"], // Add your Railway domain
+    origin: [
+      "http://localhost:3000",
+      "https://rsvp.up.railway.app",
+      "rsvpwedding.up.railway.app:5000",
+    ], // Add your Railway domain
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

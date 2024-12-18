@@ -105,7 +105,7 @@ export default function FirstSection() {
             <div className="text-xl sm:text-2xl text-white italic">and</div>
             <div>
               <h1 className="font-aniyah text-4xl md:text-7xl text-white">
-                Leahlaine
+                Leah
                 <span className="mt-3 font-serif text-xl sm:text-2xl block">
                   Layzon
                 </span>

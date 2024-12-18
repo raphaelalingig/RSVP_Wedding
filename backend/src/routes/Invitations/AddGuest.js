@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   try {
     // Verify admin credentials and get username
     const [adminResults] = await db.query(
-      "SELECT * FROM Admins WHERE email = ? AND password = ?",
+      "SELECT * FROM admins WHERE email = ? AND password = ?",
       [emailAdmin, passwordAdmin]
     );
 
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
 
     // Insert invitation data, including the username
     const [invitationResults] = await db.query(
-      "INSERT INTO Invitations (guestName, token, addedBy) VALUES (?, ?, ?)",
+      "INSERT INTO invitations (guestName, token, addedBy) VALUES (?, ?, ?)",
       [guestName, token, adminId]
     );
 

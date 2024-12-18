@@ -24,7 +24,7 @@ router.put("/", async (req, res) => {
   try {
     // First verify admin credentials
     const [adminResults] = await db.query(
-      "SELECT * FROM Admins WHERE email = ? AND password = ?",
+      "SELECT * FROM admins WHERE email = ? AND password = ?",
       [emailAdmin, passwordAdmin]
     );
 
@@ -37,7 +37,7 @@ router.put("/", async (req, res) => {
 
     // Check if the invitation exists
     const [invitationCheck] = await db.query(
-      "SELECT * FROM Invitations WHERE id = ?",
+      "SELECT * FROM invitations WHERE id = ?",
       [id]
     );
 
@@ -50,7 +50,7 @@ router.put("/", async (req, res) => {
 
     // Update the invitation
     const [updateResult] = await db.query(
-      "UPDATE Invitations SET guestName = ?, status = ? WHERE id = ?",
+      "UPDATE invitations SET guestName = ?, status = ? WHERE id = ?",
       [guestName, status, id]
     );
 
@@ -63,7 +63,7 @@ router.put("/", async (req, res) => {
 
     // Fetch the updated invitation
     const [updatedInvitation] = await db.query(
-      "SELECT i.*, a.username as addedBy FROM Invitations i JOIN Admins a ON i.addedBy = a.id WHERE i.id = ?",
+      "SELECT i.*, a.username as addedBy FROM invitations i JOIN Admins a ON i.addedBy = a.id WHERE i.id = ?",
       [id]
     );
 
@@ -99,7 +99,7 @@ router.post("/", async (req, res) => {
 
   try {
     const [invitationCheck] = await db.query(
-      "SELECT * FROM Invitations WHERE token = ?",
+      "SELECT * FROM invitations WHERE token = ?",
       [token]
     );
 
@@ -111,7 +111,7 @@ router.post("/", async (req, res) => {
     }
 
     const [updateResult] = await db.query(
-      "UPDATE Invitations SET status = ? WHERE token = ?",
+      "UPDATE invitations SET status = ? WHERE token = ?",
       [status, token]
     );
 

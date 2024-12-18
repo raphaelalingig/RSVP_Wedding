@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
   try {
     // Query the database for a user with the provided email and password
     const [results] = await db.query(
-      "SELECT * FROM Admins WHERE email = ? AND password = ?",
+      "SELECT * FROM admins WHERE email = ? AND password = ?",
       [email, password]
     );
 

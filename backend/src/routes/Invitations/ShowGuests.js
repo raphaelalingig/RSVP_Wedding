@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 
   try {
     const [adminResults] = await db.query(
-      "SELECT * FROM Admins WHERE email = ? AND password = ?",
+      "SELECT * FROM admins WHERE email = ? AND password = ?",
       [emailAdmin, passwordAdmin]
     );
 
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
 // New GET method
 router.get("/", async (req, res) => {
   try {
-    const [guestResults] = await db.query("SELECT * FROM Invitations");
+    const [guestResults] = await db.query("SELECT * FROM invitations");
 
     if (guestResults.length > 0) {
       return res.status(200).json({

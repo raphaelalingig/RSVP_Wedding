@@ -15,7 +15,7 @@ router.delete("/", async (req, res) => {
   try {
     // First verify admin credentials
     const [adminResults] = await db.query(
-      "SELECT * FROM Admins WHERE email = ? AND password = ?",
+      "SELECT * FROM admins WHERE email = ? AND password = ?",
       [emailAdmin, passwordAdmin]
     );
 
@@ -28,7 +28,7 @@ router.delete("/", async (req, res) => {
 
     // Check if the invitation exists
     const [invitationCheck] = await db.query(
-      "SELECT * FROM Invitations WHERE id = ?",
+      "SELECT * FROM invitations WHERE id = ?",
       [id]
     );
 
@@ -41,7 +41,7 @@ router.delete("/", async (req, res) => {
 
     // Delete the invitation
     const [deleteResult] = await db.query(
-      "DELETE FROM Invitations WHERE id = ?",
+      "DELETE FROM invitations WHERE id = ?",
       [id]
     );
 

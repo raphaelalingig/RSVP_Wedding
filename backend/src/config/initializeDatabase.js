@@ -8,17 +8,17 @@ export async function initializeDatabase() {
       port: process.env.DB_PORT,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      database: "railway",
+      database: process.env.DB_NAME, // Use the Railway database name
     };
 
-    // First create a connection without specifying a database
+    // Create connection
     let connection = await createConnection(connectionConfig);
 
-    // Create the database if it doesn't exist
-    await connection.query("CREATE DATABASE IF NOT EXISTS rsvp");
-    await connection.query("USE rsvp");
+    // No need to create database since Railway provides it
+    // Just use the existing database
+    await connection.query(`USE ${process.env.DB_NAME}`);
 
-    console.log("Database created/selected successfully");
+    console.log("Connected to Railway database successfully");
 
     const tables = [
       `CREATE TABLE IF NOT EXISTS admins (
@@ -28,7 +28,6 @@ export async function initializeDatabase() {
         username VARCHAR(255)
       )`,
       `CREATE TABLE IF NOT EXISTS invitations (
-        
         id INT AUTO_INCREMENT PRIMARY KEY,
         guestName VARCHAR(255),
         token VARCHAR(255),
@@ -51,19 +50,17 @@ export async function initializeDatabase() {
       }
     }
 
-    // Insert default admin if it doesn't exist
-
     // Show existing tables for verification
     const [existingTables] = await connection.query("SHOW TABLES");
     console.log("Existing Tables:", existingTables);
 
     await connection.end();
   } catch (error) {
-    console.error("Comprehensive Database Connection Error:", {
+    console.error("Database Connection Error:", {
       message: error.message,
       code: error.code,
       errno: error.errno,
     });
-    throw error; // Re-throw the error to be caught by the calling function
+    throw error;
   }
 }

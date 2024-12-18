@@ -5,6 +5,7 @@ import AnalyticsCharts from "./AnalyticsCharts";
 import api_url from "../../config/api_url";
 import EditGuests from "./DashboardActions/EditGuests";
 import Swal from "sweetalert2";
+import { urlFormat } from "../../config/api_url";
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -193,13 +194,11 @@ const Dashboard = () => {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <span className="truncate max-w-xs">
-                        {`https://rsvp.com/invitation/${guest.token}`}
+                        {`${urlFormat}${guest.token}`}
                       </span>
                       <button
                         onClick={() =>
-                          copyToClipboard(
-                            `https://rsvp.com/guest/${guest.token}`
-                          )
+                          copyToClipboard(`${urlFormat}${guest.token}`)
                         }
                         className="text-gray-500 hover:text-gray-700"
                       >

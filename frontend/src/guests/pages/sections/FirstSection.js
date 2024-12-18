@@ -12,7 +12,7 @@ export default function FirstSection() {
 
   const [showEnvelope, setShowEnvelope] = useState(false);
   const [guestLists, setGuestLists] = useState([]);
-  const [guestTokenFound, setGuestTokenFound] = useState(null);
+  const [guestTokenFound, setGuestTokenFound] = useState("");
 
   const { token } = useParams();
 
@@ -48,30 +48,34 @@ export default function FirstSection() {
 
         if (response.status === 200) {
           const guests = response.data.Data;
-          setGuestLists(guests);
-          console.log("Guest Lists:", guests);
+          console.log("Guests fetched:", guests);
+          console.log("Current token from URL:", token); // Log the token from URL
 
-          // Check if the token matches any guest's token
-          const guest = guests.find((guest) => guest.token === token);
-          if (guest) {
-            console.log("Guest Token Found from firstsection:", guest); // log here
-            setGuestTokenFound(guest);
+          setGuestLists(guests);
+
+          if (token) {
+            // Add more detailed logging
+            guests.forEach((guest) => {
+              console.log(`Comparing token ${guest.token} with ${token}`);
+              console.log(`Match?: ${guest.token === token}`);
+            });
+
+            const foundGuest = guests.find((guest) => guest.token === token);
+            console.log("Found guest:", foundGuest);
+            setGuestTokenFound(foundGuest || null);
           }
         }
       } catch (error) {
         console.error("Error fetching guests:", error);
-        setGuestLists([]); // Or handle the error appropriately
+        setGuestLists([]);
       }
     };
 
-    // Fetch guests when the component mounts
     fetchGuests();
-  }, [token]); // Run the effect again if the token changes
+  }, [token]);
 
   useEffect(() => {
-    if (guestTokenFound) {
-      console.log("Guest Token Found from firstsection:", guestTokenFound);
-    }
+    console.log("Guest Token Found from firstsection:", guestTokenFound);
   }, [guestTokenFound]);
 
   return (

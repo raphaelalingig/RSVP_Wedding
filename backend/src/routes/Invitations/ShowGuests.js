@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     }
 
     if (adminResults.length > 0) {
-      const [guestResults] = await db.query("SELECT * FROM Invitations");
+      const [guestResults] = await db.query("SELECT * FROM invitations");
 
       if (guestResults.length > 0) {
         return res.status(200).json({

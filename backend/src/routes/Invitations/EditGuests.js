@@ -63,7 +63,7 @@ router.put("/", async (req, res) => {
 
     // Fetch the updated invitation
     const [updatedInvitation] = await db.query(
-      "SELECT i.*, a.username as addedBy FROM invitations i JOIN Admins a ON i.addedBy = a.id WHERE i.id = ?",
+      "SELECT i.*, a.username as addedBy FROM invitations i JOIN admins a ON i.addedBy = a.id WHERE i.id = ?",
       [id]
     );
 

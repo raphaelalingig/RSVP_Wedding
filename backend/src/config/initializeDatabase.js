@@ -5,8 +5,10 @@ export async function initializeDatabase() {
     // Create connection config object
     const connectionConfig = {
       host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
       user: process.env.DB_USER,
-      port: 3306,
+      password: process.env.DB_PASSWORD,
+      database: "railway",
     };
 
     // First create a connection without specifying a database

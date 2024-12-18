@@ -20,7 +20,13 @@ const urlFormat = "/api/v1/";
 
 // Middleware
 app.use(json());
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // Routes
 

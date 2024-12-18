@@ -26,6 +26,8 @@ app.use(
       "http://localhost:3000",
       "https://rsvp.up.railway.app",
       "rsvpwedding.up.railway.app:5000",
+      "https://rsvpwedding-production.up.railway.app",
+      "rsvpwedding-production.up.railway.app:8080",
     ], // Add your Railway domain
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,

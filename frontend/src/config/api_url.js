@@ -4,7 +4,7 @@ import axios from "axios";
 // const BASE_URL = "https://rsvp.up.railway.app/api/v1/";
 const BASE_URL = "https://rsvpwedding.up.railway.app/api/v1/";
 
-export const urlFormat = "https://rsvpwedding.up.railway.app/invitation/";
+export const urlFormat = "https://rsvpwedding-production.up.railway.app/invitation/";
 
 const api_url = axios.create({
   baseURL: BASE_URL,

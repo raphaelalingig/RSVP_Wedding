@@ -2,9 +2,9 @@
 import axios from "axios";
 
 // const BASE_URL = "https://rsvp.up.railway.app/api/v1/";
-const BASE_URL = "http://localhost:5000/api/v1/";
+const BASE_URL = "https://rsvpwedding.up.railway.app/api/v1/";
 
-export const urlFormat = "http://localhost:3000/invitation/";
+export const urlFormat = "https://rsvpwedding.up.railway.app/invitation/";
 
 const api_url = axios.create({
   baseURL: BASE_URL,

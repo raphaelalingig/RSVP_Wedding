@@ -123,7 +123,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
         >
           <div className="w-96 bg-white rounded-lg p-8 space-y-4 shadow-lg">
             <h2 className="text-2xl text-center font-serif">RSVP</h2>
-            <p className="text-center text-gray-600 italic">
+            <p className="text-center text-black italic">
               "Kindly let us know your presence to celebrate this joyous
               occasion."
             </p>
@@ -188,7 +188,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
               </button>
             </div>
             <div>
-              <p className="text-center text-gray-500 text-sm mt-4">
+              <p className="text-center text-black text-sm mt-4">
                 "Your response means the world to us. Thank you for making our
                 day special!"
               </p>

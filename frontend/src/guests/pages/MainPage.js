@@ -6,6 +6,8 @@ import Background from "./Background";
 import ThirdSection from "./sections/ThirdSection";
 import FourthSection from "./sections/FourthSection";
 import FifthSection from "./sections/FifthSection";
+import CarouselSection from "./sections/CarouselSection";
+import Carousel2 from "./sections/Carousel2";
 
 export default function MainPage() {
   return (
@@ -13,6 +15,16 @@ export default function MainPage() {
       <div className="w-full">
         <Background>
           <FirstSection />
+        </Background>
+      </div>
+      <div className="w-full relative">
+        <Background>
+          <CarouselSection />
+        </Background>
+      </div>
+      <div className="w-full ">
+        <Background>
+          <Carousel2 />
         </Background>
       </div>
       <div className="w-full">

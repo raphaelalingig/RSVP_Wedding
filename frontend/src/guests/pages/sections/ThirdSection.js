@@ -16,7 +16,7 @@ export default function ThirdSection() {
 
           {/* Reception Section */}
           <div>
-            <h2 className="text-yellow-300 text-lg font-bold tracking-wide uppercase">
+            <h2 className="text-white text-xl font-bold tracking-wide uppercase">
               Reception
             </h2>
             <p className="mt-2 text-white">
@@ -30,8 +30,8 @@ export default function ThirdSection() {
           </div>
 
           {/* Dress Code */}
-          <div>
-            <h2 className="text-yellow-300 text-lg font-bold tracking-wide uppercase">
+          {/* <div>
+            <h2 className="text-white text-xl font-bold tracking-wide uppercase">
               Dress Code
             </h2>
             <p className="mt-2 text-white">
@@ -42,11 +42,11 @@ export default function ThirdSection() {
               </span>{" "}
               (NO colored or white outfits for all our guests).
             </p>
-          </div>
+          </div> */}
 
           {/* Children Section */}
           <div>
-            <h2 className="text-yellow-300 text-lg font-bold tracking-wide uppercase">
+            <h2 className="text-white text-xl font-bold tracking-wide uppercase">
               Children
             </h2>
             <p className="mt-2 text-white">
@@ -59,7 +59,7 @@ export default function ThirdSection() {
 
           {/* RSVP Section */}
           <div>
-            <h2 className="text-yellow-300 text-lg font-bold tracking-wide uppercase">
+            <h2 className="text-white text-xl font-bold tracking-wide uppercase">
               RSVP
             </h2>
             <p className="mt-2 text-white">
@@ -74,7 +74,7 @@ export default function ThirdSection() {
 
           {/* Reserved Seats */}
           <div className="pt-4">
-            <h2 className="text-yellow-300 font-extrabold text-xl uppercase">
+            <h2 className="text-white font-extrabold text-xl uppercase">
               WE HAVE RESERVED <span className="underline">_____</span> SEAT(S)
               IN YOUR HONOR.
             </h2>
@@ -85,7 +85,7 @@ export default function ThirdSection() {
           </div>
 
           {/* Hashtag */}
-          <p className="text-yellow-300 text-gray-600 italic font-medium">
+          <p className="text-white text-white italic font-medium">
             #FromYesToForeverWithRonAndLeah
           </p>
         </div>

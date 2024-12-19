@@ -26,7 +26,7 @@ export default function FifthSection() {
 
             {/* Main content */}
             <div data-aos="zoom-in" className="relative z-10">
-              <h1 className="text-4xl font-dancing-script text-center mb-8 text-white">
+              <h1 className="text-4xl font-aniyah text-center mb-8 text-white">
                 Wedding Program
               </h1>
 

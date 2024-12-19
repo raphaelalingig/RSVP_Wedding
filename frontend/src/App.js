@@ -8,6 +8,7 @@ import {
 import Dashboard from "./admin/pages/Dashboard.js";
 import Login from "./admin/auth/Login.js";
 import MainPage from "./guests/pages/MainPage.js";
+import "flowbite/dist/flowbite.min.css";
 
 function ProtectedRoute({ element: Element }) {
   const isAuthenticated =

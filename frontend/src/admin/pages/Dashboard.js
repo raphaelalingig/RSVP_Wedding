@@ -74,15 +74,38 @@ const Dashboard = () => {
     );
   };
 
-  const copyToClipboard = async (text) => {
+  const copyToClipboard = async (text, guestName) => {
     try {
+      // Copy to clipboard
       await navigator.clipboard.writeText(text);
-      // You could add a toast notification here using Flowbite's Toast component
+
+      // Create text file content
+      const fileContent = `RSVP Link for ${guestName}\n${text}`;
+
+      // Create a Blob containing the text
+      const blob = new Blob([fileContent], { type: "text/plain" });
+
+      // Create a URL for the Blob
+      const fileUrl = window.URL.createObjectURL(blob);
+
+      // Create a temporary link element
+      const downloadLink = document.createElement("a");
+      downloadLink.href = fileUrl;
+      downloadLink.download = `rsvp_link_${guestName
+        .toLowerCase()
+        .replace(/\s+/g, "_")}.txt`;
+
+      // Append link to document, click it, and remove it
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+
+      // Clean up the URL object
+      window.URL.revokeObjectURL(fileUrl);
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      console.error("Failed to copy text or create file: ", err);
     }
   };
-
   const handleEditClick = (id, guestName, status) => {
     setIsEditModalOpen(true);
     setEditSelectedGuest({ id, guestName, status });
@@ -199,7 +222,10 @@ const Dashboard = () => {
                       </span>
                       <button
                         onClick={() =>
-                          copyToClipboard(`${urlFormat}${guest.token}`)
+                          copyToClipboard(
+                            `${urlFormat}${guest.token}`,
+                            guest.guestName
+                          )
                         }
                         className="text-gray-500 hover:text-gray-700"
                       >

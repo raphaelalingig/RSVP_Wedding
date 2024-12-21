@@ -8,6 +8,8 @@ import FourthSection from "./sections/FourthSection";
 import FifthSection from "./sections/FifthSection";
 import CarouselSection from "./sections/CarouselSection";
 import Carousel2 from "./sections/Carousel2";
+import Hashtag from "./sections/Hashtag";
+import WeddingMap from "./sections/WeddingMap";
 
 export default function MainPage() {
   return (
@@ -45,6 +47,16 @@ export default function MainPage() {
       <div className="w-full">
         <Background>
           <FifthSection />
+        </Background>
+      </div>
+      <div className="w-full">
+        <Background>
+          <WeddingMap />
+        </Background>
+      </div>
+      <div className="w-full">
+        <Background>
+          <Hashtag />
         </Background>
       </div>
     </div>

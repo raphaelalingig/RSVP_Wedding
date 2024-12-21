@@ -13,13 +13,11 @@ export default function FourthSection() {
         <div className="max-w-4xl mx-auto px-4 py-10 font-sans">
           {/* Header */}
           <div className="text-white text-center mb-8">
-            <h1 className="text-lg font-bold tracking-wide font-aniyah">Ronald and Leah</h1>
-            <h2 className="text-lg font-bold tracking-wide">20 JAN 2025</h2>
           </div>
 
           {/* Attire Guide Section */}
           <div className="text-white">
-            <h3 className=" text-3xl font-aniyah mb-4">Attire Guide</h3>
+            <h3 className=" text-4xl font-bold font-serif mb-4">Attire Guide</h3>
             <hr className="border-t-2 border-dotted mb-4" />
             <p className="text-sm mb-2">
               We are having a{" "}
@@ -86,7 +84,7 @@ export default function FourthSection() {
 
           {/* Gift Guide Section */}
           <div className="mt-10 text-white">
-            <h3 className="text-white text-3xl font-serif mb-4">Gift Guide</h3>
+            <h3 className="text-4xl font-bold font-serif mb-4">Gift Guide</h3>
             <hr className="border-t-2 border-dotted mb-4" />
             <p className="text-sm">
               Your presence and prayers are all that we request, but if you

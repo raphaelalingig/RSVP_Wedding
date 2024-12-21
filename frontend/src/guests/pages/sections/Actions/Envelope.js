@@ -6,32 +6,27 @@ import Swal from "sweetalert2";
 export default function Envelope({ setShowEnvelope, guestTokenFound }) {
   const [showRSVPForm, setShowRSVPForm] = useState(false);
   const [rsvpChoice, setRsvpChoice] = useState("");
-  const [respondentName, setRespondentName] = useState(""); // State for the respondent's name
+  const [respondentName, setRespondentName] = useState("");
 
   console.log("Guest Token Found:", guestTokenFound);
 
-  // Handle click outside the envelope container
   const handleClose = (e) => {
     if (e.target.id === "overlay") {
       setShowEnvelope(false);
     }
   };
 
-  // Handle video end and show RSVP form
   const handleVideoEnd = () => {
     setShowRSVPForm(true);
   };
 
-  // Handle RSVP form submit
   const handleSubmit = async () => {
     try {
-      // Ensure we have a token and have selected an RSVP choice
       if (!guestTokenFound.token || !rsvpChoice) {
         alert("Please select an RSVP option");
         return;
       }
 
-      // Show SweetAlert confirmation
       const result = await Swal.fire({
         title: "Are you sure?",
         text: `You are about to submit your RSVP as "${rsvpChoice}"`,
@@ -43,49 +38,40 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
         cancelButtonColor: "#d33",
       });
 
-      // If the user confirms the action
       if (result.isConfirmed) {
-        // Determine the status based on the RSVP choice
         const status = rsvpChoice === "Accepts with Pleasure" ? 1 : 3;
 
-        // Make the API call to update the guest's RSVP status using Axios
         const response = await api_url.post("editGuests", {
           token: guestTokenFound.token,
           status: status,
         });
 
         if (response.status === 200) {
-          // Handle successful RSVP submission
           Swal.fire({
             title: "RSVP submitted successfully!",
             icon: "success",
             confirmButtonText: "OK",
             confirmButtonColor: "#000000",
           });
-          handleCloseRsvpForm(); // Close the form
+          handleCloseRsvpForm();
         }
       }
     } catch (error) {
-      // Handle error cases
       console.error("RSVP Submission Error:", error);
 
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         Swal.fire({
           title: "Error!",
           text: `Error: ${error.response.data.message}`,
           icon: "error",
         });
       } else if (error.request) {
-        // The request was made but no response was received
         Swal.fire({
           title: "Error!",
           text: "No response received from the server",
           icon: "error",
         });
       } else {
-        // Something happened in setting up the request that triggered an Error
         Swal.fire({
           title: "Error!",
           text: "An error occurred while submitting your RSVP",
@@ -103,48 +89,54 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
   return (
     <div
       id="overlay"
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4"
       onClick={handleClose}
     >
-      <div className="h-72 w-auto flex justify-center items-center bg-white rounded-lg p-4 shadow-lg">
-        <video
-          src={opening}
-          autoPlay
-          className="h-full w-auto rounded-md"
-          onEnded={handleVideoEnd} // Trigger when video ends
-        ></video>
+      {/* Video Container */}
+      <div className="relative w-full max-w-md mx-auto">
+        <div className="aspect-video flex justify-center items-center bg-white rounded-lg p-4 shadow-lg">
+          <video
+            src={opening}
+            autoPlay
+            className="w-full h-full object-contain rounded-md"
+            onEnded={handleVideoEnd}
+          ></video>
+        </div>
       </div>
 
       {/* RSVP Form Modal */}
       {showRSVPForm && (
         <div
           id="rsvp-modal"
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4"
         >
-          <div className="w-96 bg-white rounded-lg p-8 space-y-4 shadow-lg">
-            <h2 className="text-2xl text-center font-serif">RSVP</h2>
-            <p className="text-center text-black italic">
+          <div className="w-full max-w-sm bg-white rounded-lg p-6 space-y-4 shadow-lg mx-4">
+            <h2 className="text-xl sm:text-2xl text-center font-serif">RSVP</h2>
+            <p className="text-center text-black italic text-sm sm:text-base">
               "Kindly let us know your presence to celebrate this joyous
               occasion."
             </p>
             <div className="space-y-4">
               {/* Name Input */}
               <div>
-                <label htmlFor="respondent-name" className="block text-lg">
+                <label
+                  htmlFor="respondent-name"
+                  className="block text-base sm:text-lg"
+                >
                   Name of Respondent:
                 </label>
                 <input
                   type="text"
                   id="respondent-name"
                   value={guestTokenFound.guestName}
-                  className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg"
+                  className="mt-2 w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg"
                   disabled
                   placeholder="Enter your name"
                 />
               </div>
 
               {/* RSVP Choices */}
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="flex items-center">
                   <input
                     type="radio"
@@ -153,8 +145,12 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
                     value="Accepts with Pleasure"
                     checked={rsvpChoice === "Accepts with Pleasure"}
                     onChange={() => setRsvpChoice("Accepts with Pleasure")}
+                    className="w-4 h-4"
                   />
-                  <label htmlFor="accepts" className="ml-2 text-lg">
+                  <label
+                    htmlFor="accepts"
+                    className="ml-2 text-base sm:text-lg"
+                  >
                     Accepts with Pleasure
                   </label>
                 </div>
@@ -166,29 +162,33 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
                     value="Declines with Regret"
                     checked={rsvpChoice === "Declines with Regret"}
                     onChange={() => setRsvpChoice("Declines with Regret")}
+                    className="w-4 h-4"
                   />
-                  <label htmlFor="declines" className="ml-2 text-lg">
+                  <label
+                    htmlFor="declines"
+                    className="ml-2 text-base sm:text-lg"
+                  >
                     Declines with Regret
                   </label>
                 </div>
               </div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-4">
               <button
                 onClick={() => handleCloseRsvpForm()}
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg text-sm sm:text-base flex-1"
               >
                 Close
               </button>
               <button
                 onClick={handleSubmit}
-                className="px-4 py-2 bg-black text-white rounded-lg"
+                className="px-4 py-2 bg-black text-white rounded-lg text-sm sm:text-base flex-1"
               >
                 Submit
               </button>
             </div>
             <div>
-              <p className="text-center text-black text-sm mt-4">
+              <p className="text-center text-black text-xs sm:text-sm mt-4">
                 "Your response means the world to us. Thank you for making our
                 day special!"
               </p>

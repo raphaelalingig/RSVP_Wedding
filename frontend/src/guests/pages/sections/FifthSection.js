@@ -49,7 +49,7 @@ export default function FifthSection() {
               </div>
 
               <div className="text-center">
-                <h2 className="font-aniyah text-3xl font-dancing-script mb-2">
+                <h2 className="font-aniyah text-xl sm:text-3xl font-dancing-script mb-2">
                   Ronald and Leah
                 </h2>
                 <p className="text-gray-400 tracking-widest">01.20.25</p>

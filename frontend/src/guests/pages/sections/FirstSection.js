@@ -6,7 +6,6 @@ import "aos/dist/aos.css";
 import Envelope from "./Actions/Envelope";
 import api_url from "../../../config/api_url";
 import { useParams } from "react-router-dom";
-import firstSectionPic from "../../assets/wedding-pictures/37321513-4c85-4058-809c-10ec3e766ebc_20241219_135005_0000.jpg";
 
 export default function FirstSection() {
   AOS.init();
@@ -80,72 +79,77 @@ export default function FirstSection() {
   }, [guestTokenFound]);
 
   return (
-    <div>
-      <div className="relative z-10 flex items-center justify-center min-h-screen text-center p-4">
-        <div className="flex flex-col md:flex-row items-center justify-center w-full min-h-screen gap-8">
-          {/* Left image with border */}
-          <div data-aos="fade-right" className="w-1/2 md:w-1/2 px-4">
-            <img
-              src={firstSectionPic}
-              alt="Image"
-              className="w-full max-w-lg mx-auto rounded-lg transform transition duration-300 hover:scale-105 object-cover"
-            />
-          </div>
+    <div className="relative z-10 flex items-center justify-center min-h-screen text-center">
+      <div className="flex flex-col md:flex-row items-center justify-center w-full min-h-screen gap-8">
+        {/* Left image with border */}
+        <div data-aos="fade-right" className="w-full md:w-1/2 px-4">
+          <h1 className="font-serif text-md sm:text-xl text-white mb-4">
+            JOIN US FOR OUR SPECIAL WEDDING DAY
+          </h1>
+          <img
+            src="https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786030/WeddingPictures/qfhwmny6geccmx24jgqt.jpg"
+            alt="Image"
+            className="w-full min-w-md max-w-lg mx-auto rounded-lg transform transition duration-300 hover:scale-105 object-cover"
+          />
+        </div>
 
-          {/* Main content */}
-          <div
-            data-aos="zoom-in-down"
-            className="flex flex-col items-center justify-center w-full md:w-1/2 space-y-6 px-4 sm:mb-12 mr-5"
-          >
+        {/* Main content */}
+        <div
+          data-aos="zoom-in-down"
+          className="flex flex-col sm:flex-col items-center justify-center w-full md:w-1/2 space-y-6 px-4 sm:mb-12 mr-5"
+        >
+          <div className="flex flex-row sm:flex-col items-center">
             <h1 className="font-aniyah text-2xl md:text-7xl text-white">
               Ronald
               <span className="font-serif text-xl sm:text-2xl block">
                 Dañas
               </span>
             </h1>
-            <div className="text-xl sm:text-2xl text-white italic">and</div>
+            <div className="text-xl sm:text-2xl text-white px-3 italic">
+              and
+            </div>
             <div>
               <h1 className="font-aniyah text-2xl md:text-7xl text-white">
                 Leah
-                <span className="mt-3 font-serif text-xl sm:text-2xl block">
+                <span className="sm:mt-3 font-serif text-xl sm:text-2xl block">
                   Layson
                 </span>
               </h1>
             </div>
-            <div className="space-y-4">
-              <h1 className="font-serif text-lg sm:text-xl text-white">
-                JOIN US FOR OUR SPECIAL WEDDING DAY ON
-              </h1>
-              <h1 className="font-serif text-lg sm:text-xl text-white">
-                MONDAY 20TH of JANUARY, 2025
-              </h1>
-              <h1 className="font-serif text-lg sm:text-xl text-white">
-                CEREMONY WILL START AT 3:00 P.M. SAN GUILLERMO DE MALEVAL PARISH
-                IPONAN, CAGAYAN DE ORO CITY
-              </h1>
-            </div>
+          </div>
+          <div className="space-y-4">
+            <h1 className="font-serif text-sm sm:text-xl text-white">
+              MONDAY 20TH of JANUARY, 2025
+            </h1>
+            <h1 className="font-serif text-sm sm:text-xl text-white">
+              Ceremony will start AT 3:00 P.M.
+            </h1>
+            <h1 className="font-serif text-sm sm:text-xl text-white">
+              San Guillermo de Maleval Parish Iponan, <br />
+              Cagayan de Oro City
+            </h1>
           </div>
         </div>
-
-        {token && (
-          <div data-aos="fade-left" className="absolute top-0 right-0 p-4">
-            <img
-              onClick={handleEnvelopeClick}
-              src={giftIcon}
-              alt="Gift Icon"
-              className="w-16 md:w-24"
-            />
-          </div>
-        )}
-
-        {showEnvelope && (
-          <Envelope
-            setShowEnvelope={setShowEnvelope}
-            showEnvelope={showEnvelope}
-            guestTokenFound={guestTokenFound}
-          />
-        )}
       </div>
+
+      {token && (
+        <div data-aos="fade-left" className="absolute top-0 right-0 p-4">
+          <img
+            onClick={handleEnvelopeClick}
+            src={giftIcon}
+            alt="Gift Icon"
+            className="w-16 md:w-24"
+          />
+        </div>
+      )}
+
+      {showEnvelope && (
+        <Envelope
+          setShowEnvelope={setShowEnvelope}
+          showEnvelope={showEnvelope}
+          guestTokenFound={guestTokenFound}
+        />
+      )}
     </div>
   );
 }

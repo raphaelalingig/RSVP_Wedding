@@ -22,13 +22,13 @@ export default function SecondSection() {
 
           {/* Entourage Section */}
           <div data-aos="zoom-in" className="text-center mb-10">
-            <h2 className="font-aniyah text-3xl font-bold text-white mb-4">
+            <h2 className="font-aniyah text-2xl font-bold text-white mb-4">
               Entourage List
             </h2>
 
             {/* Principal Sponsors */}
             <div className="mb-8">
-              <h3 className="text-2xl font-notoseriff font-semibold text-white">
+              <h3 className="text-lg sm:text-xl uppercase font-notoseriff font-bold text-white">
                 Principal Sponsors
               </h3>
               <div className="flex flex-col md:flex-row justify-center gap-6 mt-4">
@@ -52,13 +52,11 @@ export default function SecondSection() {
             {/* Best Man & Maid of Honor */}
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div>
-                <h3 className="text-xl font-semibold text-white">
-                  Best Man
-                </h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Best Man</h3>
                 <p>Rey Maurice T. Gutierez</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
                   Maid of Honor
                 </h3>
                 <p>Marichu T. Paler</p>
@@ -68,9 +66,7 @@ export default function SecondSection() {
             {/* Groomsmen & Bridesmaids */}
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div>
-                <h3 className="text-xl font-semibold text-white">
-                  Groomsmen
-                </h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Groomsmen</h3>
                 <ul className="list-disc list-inside text-white">
                   <p>Rafael T. Dañas</p>
                   <p>Elrey T. Dañas</p>
@@ -79,7 +75,7 @@ export default function SecondSection() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
                   Bridesmaids
                 </h3>
                 <ul className="list-disc list-inside text-white">
@@ -94,19 +90,17 @@ export default function SecondSection() {
             {/* Candle, Veil, and Cord */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div>
-                <h3 className="text-xl font-semibold text-white">
-                  Candle
-                </h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Candle</h3>
                 <p>Gary Vic Monton</p>
                 <p>Christine Paula Villano</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">Veil</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Veil</h3>
                 <p>Carlo Pfel O. Acuña</p>
                 <p>Lalaine L. Acuña</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">Cord</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Cord</h3>
                 <p>Randy T. Dañas</p>
                 <p>Shanna Grace J. Dañas</p>
               </div>
@@ -115,19 +109,19 @@ export default function SecondSection() {
             {/* Bearers */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center">
               <div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
                   Ring Bearer
                 </h3>
                 <p>Markus Alastair O. Jabson</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
                   Coin Bearer
                 </h3>
                 <p>Rance Dylan J. Dañas</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
                   Bible Bearer
                 </h3>
                 <p>John Adrian G. Generoso</p>
@@ -136,10 +130,8 @@ export default function SecondSection() {
 
             {/* Flower Girls */}
             <div className="text-center">
-              <h3 className="text-xl font-semibold text-white">
-                Flower Girls
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+              <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Flower Girls</h3>
+              <div className="flex flex-col md:flex-row justify-center gap-6 mt-4">
                 <ul className="list-disc list-inside text-white">
                   <p>Chessa Hailey A. Rodriguez</p>
                   <p>Marianne Chelley M. Patuasic</p>
@@ -149,6 +141,7 @@ export default function SecondSection() {
                   <p>Caroline Marie L. Acuña</p>
                 </ul>
               </div>
+            
             </div>
           </div>
         </div>

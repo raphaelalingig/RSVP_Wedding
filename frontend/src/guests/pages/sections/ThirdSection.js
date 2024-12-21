@@ -52,8 +52,11 @@ export default function ThirdSection() {
             <p className="mt-2 text-white">
               While we love to watch children run and play, this is an adult
               only kind of day. <br />
-              We respectfully request that <em>NO CHILDREN</em> attend the
-              ceremony and reception. We thank you for your understanding.
+              We respectfully request that{" "}
+              <span className="font-bold">
+                <em>NO CHILDREN</em> attend the ceremony and reception
+              </span>
+              .<br /> We thank you for your understanding.
             </p>
           </div>
 
@@ -62,6 +65,14 @@ export default function ThirdSection() {
             <h2 className="text-white text-xl font-bold tracking-wide uppercase">
               RSVP
             </h2>
+            <p className="mt-2 text-white">
+              To ensure there is enough food and drink for everyone,{" "}
+              <span className="font-bold">
+                <br />
+                please send a response to this invitation
+                <br /> on or before January 10, 2025 (Friday).
+              </span>
+            </p>
             <p className="mt-2 text-white">
               Leah:{" "}
               <a href="tel:09672534143" className="underline">
@@ -85,7 +96,7 @@ export default function ThirdSection() {
           </div>
 
           {/* Hashtag */}
-          <p className="text-white text-white italic font-medium">
+          <p className="text-white italic font-medium">
             #FromYesToForeverWithRonAndLeah
           </p>
         </div>

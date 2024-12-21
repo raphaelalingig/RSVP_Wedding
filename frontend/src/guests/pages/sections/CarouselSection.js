@@ -1,10 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../css/Carousel.css";
-import firstpic from "../../assets/wedding-pictures/cf4a0fcd-d6b2-4fbc-87d7-43d834b8cca5_20241219_145000_0000.jpg";
-import secondpic from "../../assets/wedding-pictures/af626a63-2cdc-4809-beb9-1e7dfb7572ec_20241219_145118_0000.jpg";
-import thirdpic from "../../assets/wedding-pictures/37321513-4c85-4058-809c-10ec3e766ebc_20241219_135005_0000.jpg";
-import fourthpic from "../../assets/wedding-pictures/35681dc4-a292-4fb2-9912-47ac372582dd_20241219_135954_0000.jpg";
-import fifthpic from "../../assets/wedding-pictures/7acd7fc0-e0b1-470d-ada1-7edf1e824dd7_20241219_145037_0000.jpg";
 import { Clock } from "lucide-react";
 
 export default function CarouselSection() {
@@ -79,7 +74,7 @@ export default function CarouselSection() {
         ref={sectionRef}
         className="flex items-center flex-col absolute top-12"
       >
-        <h2 className="font-aniyah text-white text-4xl font-dancing-script mb-2">
+        <h2 className="font-aniyah text-white sm:text-4xl text-2xl font-dancing-script mb-2">
           Ronald and Leah
         </h2>
         <p className="text-gray-400 tracking-widest">01.20.25</p>
@@ -89,29 +84,49 @@ export default function CarouselSection() {
         lg:w-full lg:h-96 lg:pt-6"
       >
         <img
-          src={firstpic}
+          src="https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786046/WeddingPictures/ctzj7biks6phgcebae63.jpg"
           className="pic01 cursor-pointer"
-          onClick={() => handleImageClick(firstpic)}
+          onClick={() =>
+            handleImageClick(
+              "https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786046/WeddingPictures/ctzj7biks6phgcebae63.jpg"
+            )
+          }
         />
         <img
-          src={fourthpic}
+          src="https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786037/WeddingPictures/liqr4oof1kdgu9xdfrui.jpg"
           className="pic02 cursor-pointer"
-          onClick={() => handleImageClick(fourthpic)}
+          onClick={() =>
+            handleImageClick(
+              "https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786037/WeddingPictures/liqr4oof1kdgu9xdfrui.jpg"
+            )
+          }
         />
         <img
-          src={secondpic}
+          src="https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786041/WeddingPictures/la7hybttr83wxbyzamvp.jpg"
           className="pic03 cursor-pointer"
-          onClick={() => handleImageClick(secondpic)}
+          onClick={() =>
+            handleImageClick(
+              "https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786041/WeddingPictures/la7hybttr83wxbyzamvp.jpg"
+            )
+          }
         />
         <img
-          src={thirdpic}
+          src="https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786043/WeddingPictures/cbqxywt0fpimxkzaudd2.jpg"
           className="pic04 cursor-pointer"
-          onClick={() => handleImageClick(thirdpic)}
+          onClick={() =>
+            handleImageClick(
+              "https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786043/WeddingPictures/cbqxywt0fpimxkzaudd2.jpg"
+            )
+          }
         />
         <img
-          src={fifthpic}
+          src="https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786033/WeddingPictures/vlrfd6krab8noxxh4zxh.jpg"
           className="pic05 cursor-pointer"
-          onClick={() => handleImageClick(fifthpic)}
+          onClick={() =>
+            handleImageClick(
+              "https://res.cloudinary.com/dlu8gmxsn/image/upload/v1734786033/WeddingPictures/vlrfd6krab8noxxh4zxh.jpg"
+            )
+          }
         />
       </div>
 

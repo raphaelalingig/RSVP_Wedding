@@ -98,6 +98,7 @@ const Dashboard = () => {
       confirmButtonText: "Yes, delete it!",
       confirmButtonColor: "#d33",
       cancelButtonText: "Cancel",
+      cancelButtonColor: "#000000",
       reverseButtons: true,
     });
 

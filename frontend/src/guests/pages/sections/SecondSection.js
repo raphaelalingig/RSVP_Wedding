@@ -52,7 +52,9 @@ export default function SecondSection() {
             {/* Best Man & Maid of Honor */}
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div>
-                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Best Man</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                  Best Man
+                </h3>
                 <p>Rey Maurice T. Gutierez</p>
               </div>
               <div>
@@ -60,13 +62,16 @@ export default function SecondSection() {
                   Maid of Honor
                 </h3>
                 <p>Marichu T. Paler</p>
+                <p>April Kate G. Mabilla</p>
               </div>
             </div>
 
             {/* Groomsmen & Bridesmaids */}
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div>
-                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Groomsmen</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                  Groomsmen
+                </h3>
                 <ul className="list-disc list-inside text-white">
                   <p>Rafael T. Dañas</p>
                   <p>Elrey T. Dañas</p>
@@ -90,17 +95,23 @@ export default function SecondSection() {
             {/* Candle, Veil, and Cord */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div>
-                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Candle</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                  Candle
+                </h3>
                 <p>Gary Vic Monton</p>
                 <p>Christine Paula Villano</p>
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Veil</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                  Veil
+                </h3>
                 <p>Carlo Pfel O. Acuña</p>
                 <p>Lalaine L. Acuña</p>
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Cord</h3>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                  Cord
+                </h3>
                 <p>Randy T. Dañas</p>
                 <p>Shanna Grace J. Dañas</p>
               </div>
@@ -114,23 +125,26 @@ export default function SecondSection() {
                 </h3>
                 <p>Markus Alastair O. Jabson</p>
               </div>
-              <div>
-                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
-                  Coin Bearer
-                </h3>
-                <p>Rance Dylan J. Dañas</p>
-              </div>
+
               <div>
                 <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
                   Bible Bearer
                 </h3>
                 <p>John Adrian G. Generoso</p>
               </div>
+              <div>
+                <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                  Coin Bearer
+                </h3>
+                <p>Rance Dylan J. Dañas</p>
+              </div>
             </div>
 
             {/* Flower Girls */}
             <div className="text-center">
-              <h3 className="text-lg sm:text-xl uppercase font-bold text-white">Flower Girls</h3>
+              <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
+                Flower Girls
+              </h3>
               <div className="flex flex-col md:flex-row justify-center gap-6 mt-4">
                 <ul className="list-disc list-inside text-white">
                   <p>Chessa Hailey A. Rodriguez</p>
@@ -141,7 +155,6 @@ export default function SecondSection() {
                   <p>Caroline Marie L. Acuña</p>
                 </ul>
               </div>
-            
             </div>
           </div>
         </div>

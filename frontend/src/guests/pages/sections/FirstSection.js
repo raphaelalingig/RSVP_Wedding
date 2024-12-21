@@ -96,7 +96,7 @@ export default function FirstSection() {
         {/* Main content */}
         <div
           data-aos="zoom-in-down"
-          className="flex flex-col sm:flex-col items-center justify-center w-full md:w-1/2 space-y-6 px-4 sm:mb-12 mr-5"
+          className="flex flex-col sm:flex-col items-center justify-center w-full md:w-1/2 space-y-6 px-4 sm:mb-4 mr-5"
         >
           <div className="flex flex-row sm:flex-col items-center">
             <h1 className="font-aniyah text-2xl md:text-7xl text-white">
@@ -117,16 +117,20 @@ export default function FirstSection() {
               </h1>
             </div>
           </div>
-          <div className="space-y-4">
+          <div className="">
             <h1 className="font-serif text-sm sm:text-xl text-white">
-              MONDAY 20TH of JANUARY, 2025
+              Monday 20TH of January, 2025
             </h1>
             <h1 className="font-serif text-sm sm:text-xl text-white">
-              Ceremony will start AT 3:00 P.M.
+              Ceremony will start at 3:00 P.M.
             </h1>
             <h1 className="font-serif text-sm sm:text-xl text-white">
-              San Guillermo de Maleval Parish Iponan, <br />
-              Cagayan de Oro City
+              <span className="font-bold">
+                {" "}
+                San Guillermo de Maleval Parish
+              </span>
+              , <br />
+              Iponan Cagayan de Oro City
             </h1>
           </div>
         </div>

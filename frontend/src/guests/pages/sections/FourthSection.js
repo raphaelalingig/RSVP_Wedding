@@ -12,20 +12,21 @@ export default function FourthSection() {
       <div className="relative z-10 flex items-center justify-center min-h-screen w-full">
         <div className="max-w-4xl mx-auto px-4 py-10 font-sans">
           {/* Header */}
-          <div className="text-white text-center mb-8">
-          </div>
+          <div className="text-white text-center mb-8"></div>
 
           {/* Attire Guide Section */}
           <div className="text-white">
-            <h3 className=" text-4xl font-bold font-serif mb-4">Attire Guide</h3>
+            <h3 className=" text-4xl font-bold font-serif mb-4">
+              Attire Guide
+            </h3>
             <hr className="border-t-2 border-dotted mb-4" />
             <p className="text-sm mb-2">
               We are having a{" "}
               <span className="text-white font-bold underline">
                 Black Wedding Theme
               </span>
-              . We politely ask that NO colored or white outfits for all our
-              guests.
+              . We politely ask that{" "}
+              <span className="font-bold">NO colored or white outfits for all our guests.</span>
             </p>
 
             {/* Principal Sponsors */}

@@ -1,7 +1,6 @@
 import express from "express";
 const router = express.Router();
 import db from "../../config/db.js";
-import crypto from "crypto";
 
 router.post("/", async (req, res) => {
   const { guestName, emailAdmin, passwordAdmin } = req.body;
@@ -31,8 +30,8 @@ router.post("/", async (req, res) => {
     // Extract the admin's username
     const { id: adminId, username } = adminResults[0];
 
-    // Generate a token
-    const token = crypto.randomBytes(16).toString("hex");
+    // Generate a 6-digit numeric token
+    const token = Math.floor(100000 + Math.random() * 900000).toString();
 
     // Insert invitation data, including the username
     const [invitationResults] = await db.query(
@@ -46,7 +45,7 @@ router.post("/", async (req, res) => {
       data: {
         guestName,
         token,
-        addedBy: username, // Include the username in the response
+        addedBy: username,
       },
     });
   } catch (error) {

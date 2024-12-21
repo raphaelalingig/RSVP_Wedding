@@ -125,7 +125,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
               <input
                 type="text"
                 id="respondent-name"
-                value={guestTokenFound.guestName}
+                value={guestTokenFound.guestName || "No Guest Name Found"}
                 className="mt-2 w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg"
                 disabled
                 placeholder="Enter your name"

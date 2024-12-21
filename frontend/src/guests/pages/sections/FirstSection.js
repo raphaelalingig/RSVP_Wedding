@@ -60,7 +60,7 @@ export default function FirstSection() {
               console.log(`Match?: ${guest.token === token}`);
             });
 
-            const foundGuest = guests.find((guest) => guest.token === token);
+            const foundGuest = guests.find((guest) => guest.token == token);
             console.log("Found guest:", foundGuest);
             setGuestTokenFound(foundGuest || null);
           }

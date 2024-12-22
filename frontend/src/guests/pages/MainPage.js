@@ -10,10 +10,12 @@ import CarouselSection from "./sections/CarouselSection";
 import Carousel2 from "./sections/Carousel2";
 import Hashtag from "./sections/Hashtag";
 import WeddingMap from "./sections/WeddingMap";
+import SoundPlayer from "../hooks/SoundPlayer";
 
 export default function MainPage() {
   return (
     <div className="flex flex-col">
+      <SoundPlayer />
       <div className="w-full">
         <Background>
           <FirstSection />

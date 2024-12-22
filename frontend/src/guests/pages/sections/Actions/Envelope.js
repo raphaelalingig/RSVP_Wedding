@@ -125,7 +125,8 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
                 disabled
               />
               <span className="flex justify-center text-base font-bold sm:text-md">
-                We have reserved {guestTokenFound.additionalGuests} seat(s) for you
+                We have reserved {guestTokenFound.additionalGuests} seat(s) for
+                you
               </span>
             </div>
 
@@ -165,6 +166,21 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
             </div>
 
             {/* Reason Input */}
+            {rsvpChoice === "Accepts with Pleasure" && (
+              <div>
+                <label htmlFor="reasons" className="block text-base sm:text-md">
+                  Note (Optional):
+                </label>
+                <textarea
+                  id="reasons"
+                  value={reasons}
+                  onChange={(e) => setReasons(e.target.value)}
+                  placeholder="Please specify your reason (optional)"
+                  className="mt-2 w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg"
+                />
+              </div>
+            )}
+
             {rsvpChoice === "Declines with Regret" && (
               <div>
                 <label htmlFor="reasons" className="block text-base sm:text-md">

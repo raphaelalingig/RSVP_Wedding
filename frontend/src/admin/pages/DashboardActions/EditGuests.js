@@ -12,6 +12,7 @@ export default function EditGuests({
 }) {
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+  const [reservedSeats, setReservedSeats] = useState(1); // New state for Reserved Seats
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -42,6 +43,7 @@ export default function EditGuests({
         id: editSelectedGuest.id,
         guestName: editSelectedGuest.guestName,
         status: editSelectedGuest.status,
+        additionalGuests: editSelectedGuest.additionalGuests,
         emailAdmin: adminEmail, // Use the actual admin email
         passwordAdmin: adminPassword, // Use the actual admin password
       });
@@ -106,33 +108,54 @@ export default function EditGuests({
 
           {/* Modal body */}
           <form onSubmit={handleEditSubmit} className="p-6 space-y-6">
-            <div className="flex space-x-4">
-              <input
-                type="text"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                placeholder="Guest Name"
-                value={editSelectedGuest.guestName}
-                onChange={(e) =>
-                  setEditSelectedGuest({
-                    ...editSelectedGuest,
-                    guestName: e.target.value,
-                  })
-                }
-              />
-              <select
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-                value={editSelectedGuest.status}
-                onChange={(e) =>
-                  setEditSelectedGuest({
-                    ...editSelectedGuest,
-                    status: e.target.value,
-                  })
-                }
-              >
-                <option value={1}>Confirmed</option>
-                <option value={3}>Decline</option>
-                <option value={2}>Pending</option>
-              </select>
+            <div className="flex-col">
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                  placeholder="Guest Name"
+                  value={editSelectedGuest.guestName}
+                  onChange={(e) =>
+                    setEditSelectedGuest({
+                      ...editSelectedGuest,
+                      guestName: e.target.value,
+                    })
+                  }
+                />
+                <select
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                  value={editSelectedGuest.status}
+                  onChange={(e) =>
+                    setEditSelectedGuest({
+                      ...editSelectedGuest,
+                      status: e.target.value,
+                    })
+                  }
+                >
+                  <option value={1}>Confirmed</option>
+                  <option value={3}>Decline</option>
+                  <option value={2}>Pending</option>
+                </select>
+              </div>
+              <div className="mt-3">
+                <h1 className="text-black font-semibold mb-2">
+                  Reserved Seat(s):{" "}
+                </h1>
+                <input
+                  type="number"
+                  min="1"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                  placeholder="Reserved Seats"
+                  value={editSelectedGuest.additionalGuests}
+                  onChange={(e) =>
+                    setEditSelectedGuest({
+                      ...editSelectedGuest,
+                      additionalGuests: e.target.value,
+                    })
+                  }
+                  required
+                />
+              </div>
             </div>
             <button
               type="submit"

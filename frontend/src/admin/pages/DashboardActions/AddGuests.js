@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import api_url from "../../../config/api_url";
 import Swal from "sweetalert2";
+
 export default function AddGuests({
   isModalOpen,
   setIsModalOpen,
   fetchGuests,
 }) {
-  const [guestName, setGuestName] = React.useState("");
+  const [guestName, setGuestName] = useState("");
+  const [reservedSeats, setReservedSeats] = useState(1); // New state for Reserved Seats
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
 
@@ -22,12 +24,14 @@ export default function AddGuests({
       }
     }
   }, []);
+
   const handleAddGuestSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await api_url.post("addGuest", {
         guestName,
+        additionalGuests: reservedSeats, // Include Reserved Seats in the payload
         emailAdmin: adminEmail,
         passwordAdmin: adminPassword,
       });
@@ -61,6 +65,7 @@ export default function AddGuests({
 
     setIsModalOpen(false);
   };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none bg-gray-900 bg-opacity-50">
       <div className="relative w-full max-w-md mx-auto">
@@ -102,6 +107,18 @@ export default function AddGuests({
                 placeholder="Guest Name"
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <h1 className="text-black font-semibold">Reserved Seat(s): </h1>
+              <input
+                type="number"
+                min="1"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
+                placeholder="Reserved Seats"
+                value={reservedSeats}
+                onChange={(e) => setReservedSeats(e.target.value)}
                 required
               />
             </div>

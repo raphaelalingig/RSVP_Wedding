@@ -17,6 +17,7 @@ const Dashboard = () => {
     id: null,
     guestName: "",
     status: 0,
+    additionalGuests: 0,
   });
 
   useEffect(() => {
@@ -76,9 +77,6 @@ const Dashboard = () => {
 
   const copyToClipboard = async (text, guestName) => {
     try {
-      // Copy to clipboard
-      await navigator.clipboard.writeText(text);
-
       // Create text file content
       const fileContent = `RSVP Link for ${guestName}\n${text}`;
 
@@ -106,9 +104,9 @@ const Dashboard = () => {
       console.error("Failed to copy text or create file: ", err);
     }
   };
-  const handleEditClick = (id, guestName, status) => {
+  const handleEditClick = (id, guestName, status, additionalGuests) => {
     setIsEditModalOpen(true);
-    setEditSelectedGuest({ id, guestName, status });
+    setEditSelectedGuest({ id, guestName, status, additionalGuests });
   };
 
   const handleDeleteClick = async (id, guestName) => {
@@ -196,6 +194,12 @@ const Dashboard = () => {
                   Guest Name
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Additional Guests
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Reasons
+                </th>
+                <th scope="col" className="px-6 py-3">
                   RSVP Link
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -214,6 +218,12 @@ const Dashboard = () => {
                 >
                   <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     {guest.guestName}
+                  </td>{" "}
+                  <td className="px-6 py-4 font-normal text-gray-900 whitespace-nowrap">
+                    {guest.additionalGuests}
+                  </td>
+                  <td className="px-6 py-4 font-normal text-gray-900 whitespace-nowrap">
+                    {guest.reasons}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
@@ -253,7 +263,8 @@ const Dashboard = () => {
                           handleEditClick(
                             guest.id,
                             guest.guestName,
-                            guest.status
+                            guest.status,
+                            guest.additionalGuests
                           )
                         }
                         className="font-medium text-blue-600 hover:text-blue-800"

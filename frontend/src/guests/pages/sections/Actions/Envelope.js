@@ -7,8 +7,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
   const [showRSVPForm, setShowRSVPForm] = useState(false);
   const [rsvpChoice, setRsvpChoice] = useState("");
   const [respondentName, setRespondentName] = useState("");
-
-  console.log("Guest Token Found:", guestTokenFound);
+  const [reasons, setReasons] = useState("");
 
   const handleClose = (e) => {
     if (e.target.id === "overlay") {
@@ -40,7 +39,6 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
         confirmButtonColor: "#000000",
         cancelButtonText: "Cancel",
         cancelButtonColor: "#d33",
-
       });
 
       if (result.isConfirmed) {
@@ -49,6 +47,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
         const response = await api_url.post("editGuests", {
           token: guestTokenFound.token,
           status: status,
+          reasons: reasons || null, // Include reasons if provided
         });
 
         if (response.status === 200) {
@@ -57,8 +56,6 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
             icon: "success",
             confirmButtonText: "OK",
             confirmButtonColor: "#000000",
-            okButtonColor: "#000000",
-
           });
           handleCloseRsvpForm();
         }
@@ -99,10 +96,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4"
       onClick={handleClose}
     >
-      {/* Video Container */}
-
       {/* RSVP Form Modal */}
-
       <div
         id="rsvp-modal"
         className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4"
@@ -118,18 +112,21 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
             <div>
               <label
                 htmlFor="respondent-name"
-                className="block text-base sm:text-lg"
+                className="block text-base font-bold sm:text-md"
               >
-                Name of Respondent:
+                Name of Respondent:{" "}
               </label>
+
               <input
                 type="text"
                 id="respondent-name"
                 value={guestTokenFound.guestName || "No Guest Name Found"}
                 className="mt-2 w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg"
                 disabled
-                placeholder="Enter your name"
               />
+              <span className="flex justify-center text-base font-bold sm:text-md">
+                We have reserved {guestTokenFound.additionalGuests} for you
+              </span>
             </div>
 
             {/* RSVP Choices */}
@@ -141,7 +138,10 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
                   name="rsvp"
                   value="Accepts with Pleasure"
                   checked={rsvpChoice === "Accepts with Pleasure"}
-                  onChange={() => setRsvpChoice("Accepts with Pleasure")}
+                  onChange={() => {
+                    setRsvpChoice("Accepts with Pleasure");
+                    setReasons(""); // Clear reasons when selecting Accepts
+                  }}
                   className="w-4 h-4"
                 />
                 <label htmlFor="accepts" className="ml-2 text-base sm:text-lg">
@@ -163,7 +163,24 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
                 </label>
               </div>
             </div>
+
+            {/* Reason Input */}
+            {rsvpChoice === "Declines with Regret" && (
+              <div>
+                <label htmlFor="reasons" className="block text-base sm:text-md">
+                  Reasons (Optional):
+                </label>
+                <textarea
+                  id="reasons"
+                  value={reasons}
+                  onChange={(e) => setReasons(e.target.value)}
+                  placeholder="Please specify your reason (optional)"
+                  className="mt-2 w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-lg"
+                />
+              </div>
+            )}
           </div>
+
           <div className="flex justify-between gap-4">
             <button
               onClick={() => handleCloseRsvpForm()}

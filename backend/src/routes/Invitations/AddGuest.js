@@ -3,17 +3,16 @@ const router = express.Router();
 import db from "../../config/db.js";
 
 router.post("/", async (req, res) => {
-  const { guestName, emailAdmin, passwordAdmin } = req.body;
+  const { guestName, emailAdmin, passwordAdmin, additionalGuests } = req.body;
 
   if (!guestName || !emailAdmin || !passwordAdmin) {
     return res.status(400).json({
       status: "400 Bad Request",
-      message: "All fields are required",
+      message: "Guest name, email, and password are required",
     });
   }
 
   try {
-    // Verify admin credentials and get username
     const [adminResults] = await db.query(
       "SELECT * FROM admins WHERE email = ? AND password = ?",
       [emailAdmin, passwordAdmin]
@@ -27,16 +26,13 @@ router.post("/", async (req, res) => {
       });
     }
 
-    // Extract the admin's username
     const { id: adminId, username } = adminResults[0];
-
-    // Generate a 6-digit numeric token
     const token = Math.floor(100000 + Math.random() * 900000).toString();
+    const additionalGuestsParsed = parseInt(additionalGuests, 10) || null;
 
-    // Insert invitation data, including the username
     const [invitationResults] = await db.query(
-      "INSERT INTO invitations (guestName, token, addedBy) VALUES (?, ?, ?)",
-      [guestName, token, adminId]
+      "INSERT INTO invitations (guestName, token, addedBy, additionalGuests) VALUES (?, ?, ?, ?)",
+      [guestName, token, adminId, additionalGuestsParsed]
     );
 
     res.status(200).json({
@@ -46,6 +42,7 @@ router.post("/", async (req, res) => {
         guestName,
         token,
         addedBy: username,
+        additionalGuests: additionalGuestsParsed,
       },
     });
   } catch (error) {

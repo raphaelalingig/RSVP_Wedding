@@ -88,7 +88,7 @@ router.put("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { token, status } = req.body;
+  const { token, status, reasons, additionalGuests } = req.body;
 
   if (!token || !status) {
     return res.status(400).json({
@@ -98,6 +98,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
+    // Check if the invitation exists
     const [invitationCheck] = await db.query(
       "SELECT * FROM invitations WHERE token = ?",
       [token]
@@ -110,10 +111,25 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const [updateResult] = await db.query(
-      "UPDATE invitations SET status = ? WHERE token = ?",
-      [status, token]
-    );
+    // Build the query dynamically based on the optional fields
+    let updateQuery = "UPDATE invitations SET status = ?";
+    const queryParams = [status];
+
+    if (reasons) {
+      updateQuery += ", reasons = ?";
+      queryParams.push(reasons);
+    }
+
+    if (additionalGuests) {
+      updateQuery += ", additionalGuests = ?";
+      queryParams.push(additionalGuests);
+    }
+
+    updateQuery += " WHERE token = ?";
+    queryParams.push(token);
+
+    // Execute the update query
+    const [updateResult] = await db.query(updateQuery, queryParams);
 
     if (updateResult.affectedRows === 0) {
       return res.status(500).json({

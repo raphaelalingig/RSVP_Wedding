@@ -125,7 +125,7 @@ export default function Envelope({ setShowEnvelope, guestTokenFound }) {
                 disabled
               />
               <span className="flex justify-center text-base font-bold sm:text-md">
-                We have reserved {guestTokenFound.additionalGuests} for you
+                We have reserved {guestTokenFound.additionalGuests} seat(s) for you
               </span>
             </div>
 

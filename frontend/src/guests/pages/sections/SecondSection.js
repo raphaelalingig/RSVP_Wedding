@@ -59,7 +59,7 @@ export default function SecondSection() {
               </div>
               <div>
                 <h3 className="text-lg sm:text-xl uppercase font-bold text-white">
-                  Maid of Honor
+                  Maids of Honor
                 </h3>
                 <p>Marichu T. Paler</p>
                 <p>April Kate G. Mabilla</p>

@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [guestLists, setGuestLists] = useState([]);
   const [adminEmail, setAdminEmail] = useState("");
   const [adminPassword, setAdminPassword] = useState("");
+
   const [editSelectedGuest, setEditSelectedGuest] = useState({
     id: null,
     guestName: "",
@@ -148,6 +149,56 @@ const Dashboard = () => {
       Swal.fire("Cancelled", "The guest was not deleted.", "error");
     }
   };
+
+  const downloadCSV = () => {
+    const now = new Date().toISOString().slice(0, 10); // Format as YYYY-MM-DD
+
+    if (guestLists.length === 0) {
+      console.error("No data available to download.");
+      return;
+    }
+
+    // Define status labels
+    const statusLabels = {
+      1: "Confirmed",
+      2: "Pending",
+      3: "Declined",
+    };
+
+    // Column headers
+    const headers = [
+      "Guest Name",
+      "Additional Guests",
+      "Reasons",
+      "RSVP Link",
+      "Status",
+    ];
+
+    // Map data to rows
+    const rows = guestLists.map((guest) => [
+      guest.guestName,
+      guest.additionalGuests || "",
+      guest.reasons || "",
+      `${urlFormat}${guest.token}`, // Assuming `urlFormat` is defined globally
+      statusLabels[guest.status] || "Unknown", // Map status to label, default to "Unknown"
+    ]);
+
+    // Combine headers and rows
+    const csvContent = [
+      headers.join(","), // Header row
+      ...rows.map((row) => row.map((value) => `"${value}"`).join(",")), // Data rows
+    ].join("\n");
+
+    // Create a Blob for the CSV
+    const blob = new Blob([csvContent], { type: "text/csv" });
+
+    // Create a link to download the file
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `guest-list-${now}.csv`;
+    link.click();
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <AdminNavbar />
@@ -156,26 +207,49 @@ const Dashboard = () => {
 
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-900">Guest List</h1>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            class="flex gap-2 items-center text-white bg-black hover:bg-[#555555 ] focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              class="size-5"
+          <div className="flex gap-4">
+            <button
+              onClick={() => downloadCSV(true)}
+              class="flex gap-2 items-center text-white bg-black hover:bg-[#555555 ] focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
-            <h1 className="text-sm">Add Guest</h1>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                />
+              </svg>
+
+              <h1 className="text-sm">Export to CSV</h1>
+            </button>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              class="flex gap-2 items-center text-white bg-black hover:bg-[#555555 ] focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+              <h1 className="text-sm">Add Guest</h1>
+            </button>
+          </div>
         </div>
 
         {isModalOpen && (
